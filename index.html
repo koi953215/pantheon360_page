@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Pantheon360</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css"> -->
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/fontawesome.all.min.css">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+    
+    <style>
+        /* 影片容器的響應式設計 */
+        .video-container2 {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 寬高比 */
+            height: 0;
+            overflow: hidden;
+            max-width: 1200px; /* 最大寬度限制 */
+            margin: 0 auto;
+        }
+
+        .video-container2 iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Bootstrap 欄位調整 */
+        .col-md-8.col-md-offset-2 {
+            width: 100%;
+            margin-left: 0;
+            padding: 0 15px;
+        }
+
+        .publication-video {
+            margin: 20px 0;
+        }
+
+        /* 一般螢幕尺寸的響應式設計 */
+        @media (min-width: 768px) {
+            .col-md-8.col-md-offset-2 {
+                width: 66.66667%;
+                margin-left: 16.66667%;
+            }
+        }
+
+        .scene-pills {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr); /* 一排 7 個，改數字就能改數量 */
+            gap: 10px;
+            margin-top: 20px;
+        }
+    </style>
+
+
+</head>
+
+<body style="padding: 1%; width: 100%">
+    <div class="container" style="max-width: 1500px; margin: auto;" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>🏛️Pantheon360</b>:<br>Taming Digital Twin Generation via 3D-Aware 360° Video Diffusion</br> 
+            </h2>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <video id="v0" width="100%" autoplay loop muted controls>
+                  <source src="pantheon360_videos/teaser.mp4" type="video/mp4" />
+                </video>
+                        </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    Generating complete digital twins from videos requires precise camera control, global scene coverage, and strict spatial–temporal consistency—constraints that remain challenging for perspective video generators due to their limited field of view (FoV). Their narrow FoV forces long or multi-view trajectories, amplifying cross-view inconsistency and temporal drift. We argue that 360° video generation offers a natural solution: panoramic coverage simplifies trajectory design and provides strong global context for maintaining coherence. We introduce Pantheon360: Taming Digital Twin Generation via 3D-Aware 360° Video Diffusion, a controllable 360° video generation framework that synthesizes high-fidelity videos from sparse 360° inputs. The key idea is an explicit 3D Cache, reconstructed from the input, which serves as a geometric scaffold for any user-defined camera path. This allows the diffusion model to focus on photorealistic texture refinement while the 3D Cache enforces global geometric consistency. <strong>Beyond single-image generation, we are the first video diffusion model to support 360° interpolation, enabling seamless chaining of video segments to produce extended, coherent long-form videos.</strong> Experiments show that Pantheon360 achieves superior visual quality and unmatched geometric coherence, enabling reliable and flexible 360° scene generation for downstream simulation and digital-twin applications.
+                </p>
+            </div>
+        </div>
+
+
+        <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            
+        </div>
+    </div>
+
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                  Motivation
+                </h3>
+                <image src="pantheon360_img/motivation.jpg" width=100% style="display: block; margin: auto;"></image>
+                <br>
+                <p class="text-justify">
+                    <b>Motivation for Using 360° Images for Generation.</b> <em>Left:</em> When traversing to the back of the room, 360° anchor frames provide complete scene context, enabling accurate generation of occluded regions. In contrast, perspective anchor frames have limited field-of-view and must hallucinate unseen areas, leading to significant artifacts. <em>Right:</em> Generating 360° outputs in a single pass ensures global coherence and cross-view consistency. Our method maintains consistent object structures (red boxes highlight the same door/cabinet viewed from different angles), while GEN3C's perspective-based generation produces geometrically inconsistent results across views.
+                </p>
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Our proposed framework
+                </h3>
+                <image src="pantheon360_img/pipeline.jpg" width=100% style="display: block; margin: auto;"></image>
+                <p class="text-justify">
+                    Given sparse 360° input frames, we first crop them into perspective views and reconstruct a 3D point cloud cache using foundation models (e.g., PI3, VGGT). We then render this cache along the target camera trajectory to produce a geometryonly equirectangular video Vgeo, which is encoded into latent space and concatenated with noised latents for geometric conditioning. Simultaneously, CLIP features extracted from 8 perspective crops of the first frame provide semantic conditioning via cross-attention. Our fine-tuned video diffusion model leverages both geometric and semantic conditions to generate temporally consistent, photorealistic 360° videos with precise trajectory control. For interpolation tasks, we employ dual-anchor latent fusion to blend information from both start and end frames, ensuring smooth transitions between distant viewpoints.
+                </p>
+            </div>
+        </div>
+        
+        <br>
+            
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Novel View Synthesis on Google Maps Street View
+                </h3>
+                <image src="pantheon360_img/ours_vs_gen3c_view.jpg" width=100% style="display: block; margin: auto;"></image>
+                <p class="text-justify">
+                    Our method produces geometrically accurate renderings across different viewing angles with consistent structures. GEN3C suffers from ghosting artifacts, geometric distortions, and inter-view inconsistencies.
+                </p>
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    3D Point Cloud Reconstruction Quality
+                </h3>
+                <image src="pantheon360_img/ours_vs_gen3c_3D.jpg" width=70% style="display: block; margin: auto;"></image>
+                <p class="text-justify">
+                    We reconstruct 3D point clouds from generated videos using PI3. Our method yields dense, structurally coherent reconstructions (<em>right</em>), while GEN3C produces sparse, fragmented results (<em>left</em>), demonstrating our superior 3D consistency.
+                </p>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Two-View 360° Interpolation
+                </h3>
+                
+                <div class="text-center">
+                    <div class="video-container">
+                        <video class="video" style="max-width: 100%;" id="compVideo0" loop playsinline autoplay muted controls>
+                            <source id="videoSource0" src="pantheon360_videos/short/c_car_combined.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+
+                    <p class="text-justify" style="text-align: center;">
+                        User-defined camera trajectories between sparse 360° anchors
+                    </p>
+
+                    <!-- 場景縮圖選擇器 -->
+                    <div class="pill-row scene-pills" id="scene-pills"></div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // ========== 在這裡添加你所有的場景名稱 ==========
+            const scenes = [
+                'c_car',
+                'san',
+                'downtown3',
+                'car1',
+                'car3',
+                'LA',
+                'downtown1',
+                'road',
+                'b_street',
+                'edinburgh',
+                'landfork',
+                'windmill',
+                'school',
+                'figueroa'
+                // 繼續添加你的其他場景...
+            ];
+            // ================================================
+
+            // 自動生成縮圖按鈕
+            const pillContainer = document.getElementById('scene-pills');
+            scenes.forEach((sceneName, index) => {
+                const span = document.createElement('span');
+                span.className = 'pill scene-pill' + (index === 0 ? ' active' : '');
+                span.setAttribute('data-value', sceneName);
+                span.onclick = function() { switchVideo(this, sceneName); };
+                
+                const img = document.createElement('img');
+                img.className = 'thumbnail-img';
+                img.src = `pantheon360_img/thumbnails/short/${sceneName}_3s.jpg`;
+                img.alt = sceneName;
+                img.width = 64;
+                
+                span.appendChild(img);
+                pillContainer.appendChild(span);
+            });
+
+            // 切換影片函數
+            function switchVideo(element, sceneName) {
+                // 移除所有 active class
+                document.querySelectorAll('.scene-pill').forEach(pill => {
+                    pill.classList.remove('active');
+                });
+                // 添加 active class 到點擊的元素
+                element.classList.add('active');
+                
+                // 切換影片
+                var video = document.getElementById('compVideo0');
+                var source = document.getElementById('videoSource0');
+                source.src = `pantheon360_videos/short/${sceneName}_combined.mp4`;
+                video.load();
+                video.play();
+            }
+
+            // 確保初始影片載入
+            document.addEventListener('DOMContentLoaded', function() {
+                var video = document.getElementById('compVideo0');
+                if (video) {
+                    video.load();
+                }
+            });
+        </script>
+
+
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Extended Trajectory Generation
+                </h3>
+                
+                <div class="text-center">
+                    <div class="video-container">
+                        <video class="video" style="max-width: 100%;" id="compVideo1" loop playsinline autoplay muted controls>
+                            <source id="videoSource1" src="pantheon360_videos/long/community_combined.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+
+                    <p class="text-justify" style="text-align: center;">
+                        Chain multiple panoramas with precise camera path control
+                    </p>
+
+                    <!-- 場景縮圖選擇器 -->
+                    <div class="pill-row scene-pills-long" id="scene-pills-long"></div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // ========== Extended Trajectory 場景名稱 ==========
+            const scenesLong = [
+                'community',
+                'big_street',
+                'curve',
+                'big_curve'
+                // 👆 在這裡添加你的 long 場景名稱
+            ];
+            // ================================================
+
+            // 自動生成縮圖按鈕
+            const pillContainerLong = document.getElementById('scene-pills-long');
+            scenesLong.forEach((sceneName, index) => {
+                const span = document.createElement('span');
+                span.className = 'pill scene-pill' + (index === 0 ? ' active' : '');
+                span.setAttribute('data-value', sceneName);
+                span.onclick = function() { switchVideoLong(this, sceneName); };
+                
+                const img = document.createElement('img');
+                img.className = 'thumbnail-img';
+                img.src = `pantheon360_img/thumbnails/long/${sceneName}.jpg`;
+                img.alt = sceneName;
+                img.width = 64;
+                
+                span.appendChild(img);
+                pillContainerLong.appendChild(span);
+            });
+
+            // 切換影片函數
+            function switchVideoLong(element, sceneName) {
+                // 移除所有 active class
+                document.querySelectorAll('.scene-pills-long .scene-pill').forEach(pill => {
+                    pill.classList.remove('active');
+                });
+                // 添加 active class 到點擊的元素
+                element.classList.add('active');
+                
+                // 切換影片
+                var video = document.getElementById('compVideo1');
+                var source = document.getElementById('videoSource1');
+                source.src = `pantheon360_videos/long/${sceneName}_combined.mp4`;
+                video.load();
+                video.play();
+            }
+
+            // 確保初始影片載入
+            document.addEventListener('DOMContentLoaded', function() {
+                var video = document.getElementById('compVideo1');
+                if (video) {
+                    video.load();
+                }
+            });
+        </script>
+
+
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Single-View Camera Exploration
+                </h3>
+                
+                <div class="text-center">
+                    <div class="video-container">
+                        <video class="video" style="max-width: 100%;" id="compVideo2" loop playsinline autoplay muted controls>
+                            <source id="videoSource2" src="pantheon360_videos/single/tower_combined.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+
+                    <p class="text-justify" style="text-align: center;">
+                        Navigate scenes with user-defined camera motion
+                    </p>
+
+                    <!-- 場景縮圖選擇器 -->
+                    <div class="pill-row scene-pills-single" id="scene-pills-single"></div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // ========== Single-View 場景名稱 ==========
+            const scenesSingle = [
+                'tower',
+                'tree',
+                'nature',
+                'bridge'
+                // 👆 在這裡添加你的 single 場景名稱
+            ];
+            // ================================================
+
+            // 自動生成縮圖按鈕
+            const pillContainerSingle = document.getElementById('scene-pills-single');
+            scenesSingle.forEach((sceneName, index) => {
+                const span = document.createElement('span');
+                span.className = 'pill scene-pill' + (index === 0 ? ' active' : '');
+                span.setAttribute('data-value', sceneName);
+                span.onclick = function() { switchVideoSingle(this, sceneName); };
+                
+                const img = document.createElement('img');
+                img.className = 'thumbnail-img';
+                img.src = `pantheon360_img/thumbnails/single/${sceneName}.jpg`;
+                img.alt = sceneName;
+                img.width = 64;
+                
+                span.appendChild(img);
+                pillContainerSingle.appendChild(span);
+            });
+
+            // 切換影片函數
+            function switchVideoSingle(element, sceneName) {
+                // 移除所有 active class
+                document.querySelectorAll('.scene-pills-single .scene-pill').forEach(pill => {
+                    pill.classList.remove('active');
+                });
+                // 添加 active class 到點擊的元素
+                element.classList.add('active');
+                
+                // 切換影片
+                var video = document.getElementById('compVideo2');
+                var source = document.getElementById('videoSource2');
+                source.src = `pantheon360_videos/single/${sceneName}_combined.mp4`;
+                video.load();
+                video.play();
+            }
+
+            // 確保初始影片載入
+            document.addEventListener('DOMContentLoaded', function() {
+                var video = document.getElementById('compVideo2');
+                if (video) {
+                    video.load();
+                }
+            });
+        </script>
+
+
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Stabilization via Trajectory Replanning
+                </h3>
+                
+                <div class="text-center">
+                    <div class="video-container">
+                        <video class="video" style="max-width: 100%;" id="compVideo3" loop playsinline autoplay muted controls>
+                            <source id="videoSource3" src="pantheon360_videos/shake/room1_combined.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+
+                    <p class="text-justify" style="text-align: center;">
+                        Redefine smooth camera paths from shaky 360° footage
+                    </p>
+
+                    <!-- 場景縮圖選擇器 -->
+                    <div class="pill-row scene-pills-shake" id="scene-pills-shake"></div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // ========== Stabilization 場景名稱 ==========
+            const scenesShake = [
+                'room1',
+                'room2'
+                // 👆 在這裡添加你的 shake 場景名稱
+            ];
+            // ================================================
+
+            // 自動生成縮圖按鈕
+            const pillContainerShake = document.getElementById('scene-pills-shake');
+            scenesShake.forEach((sceneName, index) => {
+                const span = document.createElement('span');
+                span.className = 'pill scene-pill' + (index === 0 ? ' active' : '');
+                span.setAttribute('data-value', sceneName);
+                span.onclick = function() { switchVideoShake(this, sceneName); };
+                
+                const img = document.createElement('img');
+                img.className = 'thumbnail-img';
+                img.src = `pantheon360_img/thumbnails/shake/${sceneName}.jpg`;
+                img.alt = sceneName;
+                img.width = 64;
+                
+                span.appendChild(img);
+                pillContainerShake.appendChild(span);
+            });
+
+            // 切換影片函數
+            function switchVideoShake(element, sceneName) {
+                // 移除所有 active class
+                document.querySelectorAll('.scene-pills-shake .scene-pill').forEach(pill => {
+                    pill.classList.remove('active');
+                });
+                // 添加 active class 到點擊的元素
+                element.classList.add('active');
+                
+                // 切換影片
+                var video = document.getElementById('compVideo3');
+                var source = document.getElementById('videoSource3');
+                source.src = `pantheon360_videos/shake/${sceneName}_combined.mp4`;
+                video.load();
+                video.play();
+            }
+
+            // 確保初始影片載入
+            document.addEventListener('DOMContentLoaded', function() {
+                var video = document.getElementById('compVideo3');
+                if (video) {
+                    video.load();
+                }
+            });
+        </script>
+
+
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Qualitative Comparisons
+                </h3>
+                
+                <div class="text-center">
+                    <div class="video-container">
+                        <video class="video" style="max-width: 100%;" id="compVideo4" loop playsinline autoplay muted controls>
+                            <source id="videoSource4" src="pantheon360_videos/compared/100380_combined.mp4" type="video/mp4" />
+                        </video>
+                    </div>
+
+                    <p class="text-justify" style="text-align: center;">
+                        <strong>Visual comparison with state-of-the-art perspective video generation methods across different views</strong>
+                    </p>
+
+                    <!-- 場景縮圖選擇器 -->
+                    <div class="pill-row scene-pills-compared" id="scene-pills-compared"></div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // ========== Comparison 場景名稱 ==========
+            const scenesCompared = [
+                '100380',    
+                '100783',
+                '100863',
+                '00807',
+                '00819',
+                '00842'
+                // 👆 在這裡添加你的 compared 場景名稱
+            ];
+            // ================================================
+
+            // 自動生成縮圖按鈕
+            const pillContainerCompared = document.getElementById('scene-pills-compared');
+            scenesCompared.forEach((sceneName, index) => {
+                const span = document.createElement('span');
+                span.className = 'pill scene-pill' + (index === 0 ? ' active' : '');
+                span.setAttribute('data-value', sceneName);
+                span.onclick = function() { switchVideoCompared(this, sceneName); };
+                
+                const img = document.createElement('img');
+                img.className = 'thumbnail-img';
+                img.src = `pantheon360_img/thumbnails/compared/${sceneName}.jpg`;
+                img.alt = sceneName;
+                img.width = 64;
+                
+                span.appendChild(img);
+                pillContainerCompared.appendChild(span);
+            });
+
+            // 切換影片函數
+            function switchVideoCompared(element, sceneName) {
+                // 移除所有 active class
+                document.querySelectorAll('.scene-pills-compared .scene-pill').forEach(pill => {
+                    pill.classList.remove('active');
+                });
+                // 添加 active class 到點擊的元素
+                element.classList.add('active');
+                
+                // 切換影片
+                var video = document.getElementById('compVideo4');
+                var source = document.getElementById('videoSource4');
+                source.src = `pantheon360_videos/compared/${sceneName}_combined.mp4`;
+                video.load();
+                video.play();
+            }
+
+            // 確保初始影片載入
+            document.addEventListener('DOMContentLoaded', function() {
+                var video = document.getElementById('compVideo4');
+                if (video) {
+                    video.load();
+                }
+            });
+        </script>
+
+
+        <br>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <p class="text-justify">
+                    <strong>Note:</strong> Due to supplementary material size constraints, results for PanoSplatt3R and GenEX are limited to 1-2 selected scenes each and can be found in the <strong>Others</strong> folder.
+                </p>
+            </div>
+        </div>
+
+        <br>
