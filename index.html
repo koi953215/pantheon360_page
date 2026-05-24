@@ -5,63 +5,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>Pantheon360</title>
+    <title>Pantheon360: Taming Digital Twin Generation via 3D-Aware 360° Video Diffusion (CVPR 2026)</title>
 
-    <meta name="description" content="">
+    <meta name="description" content="Pantheon360 is a 3D-aware 360° video diffusion model that generates controllable, geometrically consistent panoramic videos from sparse inputs along user-defined camera trajectories. CVPR 2026.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- Open Graph (Facebook / LinkedIn / Slack) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://koi953215.github.io/pantheon360_page/">
+    <meta property="og:title" content="Pantheon360: Taming Digital Twin Generation via 3D-Aware 360° Video Diffusion">
+    <meta property="og:description" content="A 3D-aware 360° video diffusion model that generates controllable, geometrically consistent panoramic videos from sparse inputs along user-defined camera trajectories. CVPR 2026.">
+    <meta property="og:image" content="https://koi953215.github.io/pantheon360_page/pantheon360_img/pipeline.jpg">
 
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://koi953215.github.io/pantheon360_page/">
+    <meta name="twitter:title" content="Pantheon360: Taming Digital Twin Generation via 3D-Aware 360° Video Diffusion">
+    <meta name="twitter:description" content="A 3D-aware 360° video diffusion model that generates controllable, geometrically consistent panoramic videos from sparse inputs along user-defined camera trajectories. CVPR 2026.">
+    <meta name="twitter:image" content="https://koi953215.github.io/pantheon360_page/pantheon360_img/pipeline.jpg">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏛️</text></svg>">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css"> -->
     <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/fontawesome.all.min.css">
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script> -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
-    <script type="text/javascript" async
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
     
     <style>
-        /* 影片容器的響應式設計 */
-        .video-container2 {
-            position: relative;
-            width: 100%;
-            padding-bottom: 56.25%; /* 16:9 寬高比 */
-            height: 0;
-            overflow: hidden;
-            max-width: 1200px; /* 最大寬度限制 */
-            margin: 0 auto;
-        }
-
-        .video-container2 iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-
         /* Bootstrap 欄位調整 */
         .col-md-8.col-md-offset-2 {
             width: 100%;
             margin-left: 0;
             padding: 0 15px;
-        }
-
-        .publication-video {
-            margin: 20px 0;
         }
 
         /* 一般螢幕尺寸的響應式設計 */
@@ -87,8 +66,63 @@
     <div class="container" style="max-width: 1500px; margin: auto;" id="main">
         <div class="row">
             <h2 class="col-md-12 text-center">
-                <b>🏛️Pantheon360</b>:<br>Taming Digital Twin Generation via 3D-Aware 360° Video Diffusion</br> 
+                <b>🏛️Pantheon360</b>:<br>Taming Digital Twin Generation via 3D-Aware 360° Video Diffusion</br>
+                <small>
+                CVPR 2026
+                </small>
             </h2>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li><a href="https://koi953215.github.io/">Ting-Hsuan Chen</a><sup>1*</sup></li>
+                    <li><a href="https://www.linkedin.com/in/ying-huan-chen-6902a9209/">Ying-Huan Chen</a><sup>2*</sup></li>
+                    <li><a href="https://ttaoretw.github.io/">Tao Tu</a><sup>3</sup></li>
+                    <li><a href="https://jayinnn.dev/">Jie-Ying Lee</a><sup>2</sup></li>
+                    <li><a href="https://choyingw.github.io/">Cho-Ying Wu</a><sup>4</sup></li>
+                    <li><a href="https://ark1234.github.io/">Fangzhou Lin</a><sup>4</sup></li>
+                    <li><a href="https://henryzhangzhy.github.io/">Hengyuan Zhang</a><sup>4</sup></li>
+                    <br>
+                    <li><a href="https://avl.ucsd.edu/dfpazr/">David Paz</a><sup>4</sup></li>
+                    <li><a href="https://scholar.google.com/citations?user=cL4bNBwAAAAJ&hl=zh-TW">Xinyu Huang</a><sup>4</sup></li>
+                    <li><a href="https://yuliangguo.github.io/">Yuliang Guo</a><sup>4&dagger;</sup></li>
+                    <li><a href="https://yulunalexliu.github.io/">Yu-Lun Liu</a><sup>2&dagger;</sup></li>
+                    <li><a href="https://yuewang.xyz/">Yue Wang</a><sup>1&dagger;</sup></li>
+                    <li><a href="https://www.liu-ren.com/">Liu Ren</a><sup>4</sup></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li><sup>1</sup>University of Southern California</li>
+                    <li><sup>2</sup>National Yang Ming Chiao Tung University</li>
+                    <li><sup>3</sup>Cornell University</li>
+                    <li><sup>4</sup>Bosch Research</li>
+                </ul>
+                <p style="margin-top:-5px;">
+                    <small><sup>*</sup>Equal contribution &nbsp;&nbsp; <sup>&dagger;</sup>Equal advising</small>
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="#" class="btn btn-default" role="button">
+                            <i class="ai ai-arxiv"></i> arXiv
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="btn btn-default disabled" role="button" aria-disabled="true">
+                            <img src="pantheon360_img/github.png" height="20" style="vertical-align: middle; margin-right: 4px;"> Code (Coming Soon)
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
 
@@ -112,12 +146,6 @@
             </div>
         </div>
 
-
-        <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            
-        </div>
-    </div>
 
         <br>
         <div class="row">
@@ -594,10 +622,21 @@
         <br>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <p class="text-justify">
-                    <strong>Note:</strong> Due to supplementary material size constraints, results for PanoSplatt3R and GenEX are limited to 1-2 selected scenes each and can be found in the <strong>Others</strong> folder.
-                </p>
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" rows="8" readonly style="resize: none; background-color: #fff;">
+@inproceedings{chen2026pantheon360,
+    title={Pantheon360: Taming Digital Twin Generation via 3D-Aware 360 Video Diffusion},
+    author={Ting-Hsuan Chen and Ying-Huan Chen and Tao Tu and Jie-Ying Lee and Cho-Ying Wu and Fangzhou Lin and Hengyuan Zhang and David Paz and Xinyu Huang and Yuliang Guo and Yu-Lun Liu and Yue Wang and Liu Ren},
+    booktitle={CVPR},
+    year={2026}
+}</textarea>
+                </div>
             </div>
         </div>
 
-        <br>
+        </div>
+    </body>
+</html>
